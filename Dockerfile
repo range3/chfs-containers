@@ -55,12 +55,25 @@ RUN \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/*
 
+ARG SPACK_EXTENSION=/home/${USERNAME}/.spack-extension
+ENV CHFS_SPACK_ENV=${SPACK_EXTENSION}/envs/chfs
 USER ${USERNAME}
 SHELL ["/bin/bash", "-l", "-c"]
-COPY --chown=${USERNAME}:${USERNAME} spack/repos/mochi-spack-packages/ /tmp/repos/mochi-spack-packages
-COPY --chown=${USERNAME}:${USERNAME} spack/repos/chfs-spack-packages/ /tmp/repos/chfs-spack-packages
-COPY --chown=${USERNAME}:${USERNAME} spack/envs/chfs/spack.yaml /tmp/envs/chfs/spack.yaml
-COPY --chown=${USERNAME}:${USERNAME} spack/envs/chfs/spack.lock /tmp/envs/chfs/spack.lock
+COPY --chown=${USERNAME}:${USERNAME} \
+  spack/repos/chfs-spack-packages/ \
+  ${SPACK_EXTENSION}/repos/chfs-spack-packages
+COPY --chown=${USERNAME}:${USERNAME} \
+  spack/repos/mochi-spack-packages/ \
+  ${SPACK_EXTENSION}/repos/mochi-spack-packages
+COPY --chown=${USERNAME}:${USERNAME} \
+  spack/envs/chfs/spack.yaml \
+  ${SPACK_EXTENSION}/envs/chfs/spack.yaml
+COPY --chown=${USERNAME}:${USERNAME} \
+  spack/envs/chfs/spack.lock \
+  ${SPACK_EXTENSION}/envs/chfs/spack.lock
 RUN \
-  spack env activate /tmp/envs/chfs \
+  spack env activate ${CHFS_SPACK_ENV} \
   && spack install
+
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
