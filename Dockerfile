@@ -49,6 +49,7 @@ RUN \
     cmake \
     pkg-config \
     rdma-core \
+    fuse \
     libfuse-dev \
   # Clean up
   && apt-get autoremove -y \
