@@ -10,7 +10,7 @@
       "spec": "mercury~boostsys"
     },
     {
-      "hash": "syhv5elnjeai4o6xw7arnj2agsyv7kah",
+      "hash": "rfrr73lsqz3uvkpxbtmzynfvchx75gnl",
       "spec": "chfs"
     }
   ],
@@ -231,7 +231,7 @@
       },
       "hash": "2lnamwrueo7otaopl2ihznaftulyhqop"
     },
-    "syhv5elnjeai4o6xw7arnj2agsyv7kah": {
+    "rfrr73lsqz3uvkpxbtmzynfvchx75gnl": {
       "name": "chfs",
       "version": "1.0.0",
       "arch": {
@@ -276,6 +276,7 @@
       },
       "namespace": "chfs",
       "parameters": {
+        "pandoc": false,
         "verbs": false,
         "cflags": [],
         "cppflags": [],
@@ -312,8 +313,7 @@
           "build_hash": "5u4hny347o6oxsflk2clkqdkxnmsakq2",
           "type": [
             "build",
-            "link",
-            "run"
+            "link"
           ]
         },
         {
@@ -371,7 +371,7 @@
           ]
         }
       ],
-      "hash": "3fwdwtqsnhewbm3phqde7zgkoiuatii5"
+      "hash": "valrpygbzjpp4wkzkbnjp75fidsvij2m"
     },
     "3cy2pozrhxm7rlrvjnbki23sjrguc4yu": {
       "name": "autoconf",

@@ -1,9 +1,12 @@
 [submodule "extern/chfs"]
 	path = extern/chfs
 	url = ../chfs
+  update = merge
 [submodule "extern/mochi-spack-packages"]
 	path = extern/mochi-spack-packages
 	url = https://github.com/mochi-hpc/mochi-spack-packages.git
+  update = merge
 [submodule "extern/chfs-spack-packages"]
 	path = extern/chfs-spack-packages
 	url = ../chfs-spack-packages
+  update = merge
