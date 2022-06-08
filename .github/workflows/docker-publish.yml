@@ -56,6 +56,7 @@ jobs:
         with:
           context: .
           file: Dockerfile
+          build-args: CHFS_SRC_SPACK_ENV=${{ github.ref_name == 'master' && 'chfs-master' || 'chfs' }}
           platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker-meta.outputs.tags }}
