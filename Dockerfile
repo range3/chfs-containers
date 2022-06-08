@@ -58,7 +58,9 @@ RUN \
   && rm -rf /var/lib/apt/lists/*
 
 ARG SPACK_EXTENSION=/home/${USERNAME}/.spack-extension
-ENV CHFS_SPACK_ENV=${SPACK_EXTENSION}/envs/chfs
+ARG CHFS_SRC_SPACK_ENV=chfs
+ARG CHFS_SPACK_ENV=${SPACK_EXTENSION}/envs/${CHFS_SRC_SPACK_ENV}
+
 USER ${USERNAME}
 SHELL ["/bin/bash", "-l", "-c"]
 COPY --chown=${USERNAME}:${USERNAME} \
@@ -68,11 +70,11 @@ COPY --chown=${USERNAME}:${USERNAME} \
   spack/repos/mochi-spack-packages/ \
   ${SPACK_EXTENSION}/repos/mochi-spack-packages
 COPY --chown=${USERNAME}:${USERNAME} \
-  spack/envs/chfs/spack.yaml \
-  ${SPACK_EXTENSION}/envs/chfs/spack.yaml
+  spack/envs/${CHFS_SRC_SPACK_ENV}/spack.yaml \
+  ${CHFS_SPACK_ENV}/
 COPY --chown=${USERNAME}:${USERNAME} \
-  spack/envs/chfs/spack.lock \
-  ${SPACK_EXTENSION}/envs/chfs/spack.lock
+  spack/envs/${CHFS_SRC_SPACK_ENV}/spack.lock \
+  ${CHFS_SPACK_ENV}/
 RUN \
   spack env activate ${CHFS_SPACK_ENV} \
   && spack install
