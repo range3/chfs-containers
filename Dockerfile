@@ -38,7 +38,8 @@ COPY etc/profile.d/03-spack.sh /etc/profile.d/03-spack.sh
 USER ${USERNAME}
 RUN \
   # spack
-  git clone -c feature.manyFiles=true https://github.com/spack/spack.git "${SPACK_ROOT}"
+  git clone -c feature.manyFiles=true https://github.com/spack/spack.git "${SPACK_ROOT}" \
+  && mkdir -p /home/${USERNAME}/.spack
 
 USER root
 RUN \

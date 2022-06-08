@@ -1,15 +1,31 @@
 version: "3.9"
+x-common:
+  &x-common
+  image: range3/chfs:master
+  init: true
+  networks:
+    chfs_net:
+  cap_add:
+    - SYS_PTRACE
+  security_opt:
+    - seccomp:unconfined
+  privileged: true
+  extra_hosts:
+    - c0:172.30.0.2
+    - c1:172.30.0.3
+
 services:
   chfsd0:
+    <<: *x-common
     image: range3/chfs:master
     ports:
       - "50000:50000"
-    privileged: true
     networks:
       chfs_net:
         ipv4_address: 172.30.0.2
     command: chfsd -d -p ofi+sockets -h 172.30.0.2:50000
   chfsd1:
+    <<: *x-common
     depends_on:
       - chfsd0
     image: range3/chfs:master
@@ -18,7 +34,6 @@ services:
     networks:
       chfs_net:
         ipv4_address: 172.30.0.3
-    privileged: true
     command: chfsd -d -p ofi+sockets -h 172.30.0.3:50000 ofi+sockets://172.30.0.2:50000
 
 networks:
